@@ -1,6 +1,23 @@
 import { Instagram, Linkedin, Mail, Send, Twitter, PhoneCall } from "lucide-react";
 
 export const Contact = () => {
+
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    formData.append("access_key",  "b4a71fb4-4546-4fbc-82da-e86f42559676" );
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+    setResult(data.success ? "Success!" : "Error");
+  };
+
   return (
     <section id="contact" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-2xl">
@@ -72,7 +89,7 @@ export const Contact = () => {
           {/* RIGHT SIDE - CONTACT FORM */}
           <div className="bg-card p-8 rounded-lg shadow-xs">
             <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
-            <form action="#" className="space-y-6">
+            <form onSubmit={onSubmit} action="#" className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-m font-medium mb-2">
                   Your Name
