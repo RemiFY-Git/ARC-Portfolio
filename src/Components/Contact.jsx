@@ -141,6 +141,12 @@ export const Contact = () => {
                 <Send size={16} /> Send
               </button>
             </form>
+
+            {/* Show Response */}
+            {result && (
+              <p className="text-center text-primary mt-4 font-medium">{result}</p>
+            )}
+            
           </div>
         </div>
       </div>
