@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Instagram, Linkedin, Mail, Send, Twitter, PhoneCall } from "lucide-react";
 
 export const Contact = () => {
@@ -8,6 +9,7 @@ export const Contact = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     formData.append("access_key",  "b4a71fb4-4546-4fbc-82da-e86f42559676" );
+    formData.append("redirect", "false");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -15,7 +17,7 @@ export const Contact = () => {
     });
 
     const data = await response.json();
-    setResult(data.success ? "Success!" : "Error");
+    setResult(data.success ? "Message Sent Successfully" : "Something went wrong. Try again.");
   };
 
   return (
